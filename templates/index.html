@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accident Severity Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Accident Severity Prediction</h2>
+      <form action="/predict" method="POST">
+        <div class="form-section">
+          <div class="input-group">
+            <label for="day_of_week">Day of Week:</label>
+            <select name="day_of_week" id="day_of_week">
+              <option value="0">Sunday</option>
+              <option value="1">Monday</option>
+              <option value="2">Tuesday</option>
+              <option value="3">Wednesday</option>
+              <option value="4">Thursday</option>
+              <option value="5">Friday</option>
+              <option value="6">Saturday</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="educational_level">Educational Level:</label>
+            <select name="educational_level" id="educational_level">
+              <option value="0">Illiterate</option>
+              <option value="1">Writing & reading</option>
+              <option value="2">Elementary school</option>
+              <option value="3">Junior high school</option>
+              <option value="4">High school</option>
+              <option value="5">Above high school</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="driving_experience">Driving Experience:</label>
+            <select name="driving_experience" id="driving_experience">
+              <option value="0">No Licence</option>
+              <option value="1">Below 1yr</option>
+              <option value="2">1-2yr</option>
+              <option value="3">2-5yr</option>
+              <option value="4">5-10yr</option>
+              <option value="5">Above 10yr</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="type_of_vehicle">Type of Vehicle:</label>
+            <select name="type_of_vehicle" id="type_of_vehicle">
+              <option value="0">Automobile</option>
+              <option value="1">Motorcycle</option>
+              <option value="3">Bicycle</option>
+              <option value="4">Taxi</option>
+              <option value="5">Lorry (41–100Q)</option>
+              <option value="6">Public (> 45 seats)</option>
+              <option value="7">Other</option>
+              <option value="8">Public (13?45 seats)</option>
+              <option value="9">Truck</option>
+              <option value="10">Public (12 seats)</option>
+              <option value="11">Ridden horse</option>
+              <option value="12">Turbo</option>
+              <option value="14">Stationwagen</option>
+              <option value="15">Special vehicle</option>
+              <option value="16">Pick up upto 10Q</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="owner_of_vehicle">Owner of Vehicle:</label>
+            <select name="owner_of_vehicle" id="owner_of_vehicle">
+              <option value="0">Owner</option>
+              <option value="1">Governmental</option>
+              <option value="2">Organization</option>
+              <option value="3">Other</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="area_accident_occured">Area Accident Occurred:</label>
+            <select name="area_accident_occured" id="area_accident_occured">
+              <option value="0">Residential areas</option>
+              <option value="1">Office areas</option>
+              <option value="2">Market areas</option>
+              <option value="3">Rural village areas</option>
+              <option value="4">Recreational areas</option>
+              <option value="5">Industrial areas</option>
+              <option value="6">Highway</option>
+              <option value="7">Church areas</option>
+              <option value="8">Agricultural areas</option>
+              <option value="9">Parking areas</option>
+              <option value="10">Hospital areas</option>
+              <option value="11"> Outside rural areas</option>
+              <option value="12">School areas</option>
+              <option value="13">Other</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="road_alignment">Road Alignment:</label>
+            <select name="road_alignment" id="road_alignment">
+              <option value="0">Tangent road with flat terrain</option>
+              <option value="1">Tangent road with mild grade and flat terrain</option>
+              <option value="2">Escarpments</option>
+              <option value="3">Tangent road with rolling terrain</option>
+              <option value="4">Gentle horizontal curve</option>
+              <option value="5">Tangent road with mountainous terrain</option>
+              <option value="6">Steep grade downward with mountainous terrain</option>
+              <option value="7">Sharp reverse curve</option>
+              <option value="8">Steep grade upward with mountainous terrain</option>
+              <option value="9">Other</option>
+
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="types_of_junction">Types of Junction:</label>
+            <select name="types_of_junction" id="types_of_junction">
+              <option value="0">No junction</option>
+              <option value="1">Y Shape</option>
+              <option value="2">T Shape</option>
+              <option value="3">Crossing</option>
+              <option value="4">O Shape</option>
+              <option value="5">Overpass</option>
+              <option value="6">Underpass</option>
+              <option value="7">X Shape</option>
+              <option value="8">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="input-group">
+            <label for="road_surface_type">Road Surface Type:</label>
+            <select name="road_surface_type" id="road_surface_type">
+              <option value="0">Asphalt roads</option>
+              <option value="1">Earth roads</option>
+              <option value="2">Gravel roads</option>
+              <option value="3">Paved roads</option>
+              <option value="4">Asphalt roads with some distress</option>
+              <option value="5">Other</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="road_surface_conditions"
+              >Road Surface Conditions:</label
+            >
+            <select name="road_surface_conditions" id="road_surface_conditions">
+              <option value="0">Dry</option>
+              <option value="1">Wet or damp</option>
+              <option value="2">Snow</option>
+              <option value="3">Flood over 3cm. deep</option>
+
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="light_conditions">Light Conditions:</label>
+            <select name="light_conditions" id="light_conditions">
+              <option value="0">Daylight</option>
+              <option value="1">Darkness - lights lit</option>
+              <option value="2">Darkness - no lighting</option>
+              <option value="3">Twilight</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="weather_conditions">Weather Conditions:</label>
+            <select name="weather_conditions" id="weather_conditions">
+              <option value="0">Normal</option>
+              <option value="1">Raining</option>
+              <option value="2">Fog or mist</option>
+              <option value="3">Windy</option>
+              <option value="4">Raining and Windy</option>
+              <option value="5">Stormy</option>
+              <option value="6">Cloudy</option>
+              <option value="7">Other</option>
+              
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="type_of_collision">Type of Collision:</label>
+            <select name="type_of_collision" id="type_of_collision">
+              <option value="0">Collision with roadside-parked vehicles</option>
+              <option value="1">Vehicle with vehicle collision</option>
+              <option value="2">Collision with animals</option>
+              <option value="3">Rollover</option>
+              <option value="4">Collision with pedestrian</option>
+              <option value="5">Collision with roadside objects</option>
+              <option value="6">Fall from vehicles</option>
+              <option value="7">With Train</option>
+              <option value="8">Other</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="number_of_vehicles_involved"
+              >Number of Vehicles Involved:</label
+            >
+            <input
+              type="number"
+              name="number_of_vehicles_involved"
+              id="number_of_vehicles_involved"
+              min="1"
+              max="7"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="vehicle_movement">Vehicle Movement:</label>
+            <select name="vehicle_movement" id="vehicle_movement">
+              <option value="0">Going straight</option>
+              <option value="1">U-Turn</option>
+              <option value="2">Turnover</option>
+              <option value="3">Waiting to go</option>
+              <option value="4">Moving Backward</option>
+              <option value="5">Getting off</option>
+              <option value="6">Reversing</option>
+              <option value="7">Parked</option>
+              <option value="8">Stopping</option>
+              <option value="9">Overtaking</option>
+              <option value="10">Entering a junction</option>
+              <option value="11">Other</option>
+            </select>
+          </div>
+          <!-- Hour of the Day -->
+          <div class="input-group">
+          <label for="hour">Hour of the Day:</label>
+          <select name="hour" id="hour">
+            {% for i in range(0, 24) %}
+            <option value="{{ i }}">{{ i }}:00</option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="input-group">
+            <label for="cause_of_accident">Cause of Accident:</label>
+            <select name="cause_of_accident" id="cause_of_accident">
+                <option value="0">Moving Backward</option>
+                <option value="1">Overtaking</option>
+                <option value="2">Changing lane to the right</option>
+                <option value="3">No priority to vehicle</option>
+                <option value="4">Changing lane to the left</option>
+                <option value="5">No priority to pedestrian</option>
+                <option value="6">No distancing</option>
+                <option value="7">Getting off the vehicle improperly</option>
+                <option value="8">Overloading</option>
+                <option value="9">Other</option>
+                <option value="10">Driving carelessly</option>
+                <option value="11">Driving at high speed</option>
+                <option value="12">Driving to the left</option>
+                <option value="13">Overturning</option>
+                <option value="14">Turnover</option>
+                <option value="15">Driving under the influence of drugs</option>
+                <option value="16">Overspeed</option>
+                <option value="17">Drunk driving</option>
+                <option value="18">Improper parking</option>
+            </select>
+        </div>
+        
+        <button type="submit">Predict</button>
+      </form>
+      <div class="output-section">
+        {% if prediction_text %}
+        <p>{{ prediction_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
